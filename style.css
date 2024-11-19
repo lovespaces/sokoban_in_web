@@ -6,11 +6,51 @@ body {
     color: white;
 }
 
+button {
+    color: white;
+}
+
 a {
     color: white;
     text-decoration: none;
     opacity: 0.25;
 }
+
+input[type="checkbox"] {
+    border-radius: 2.5px;
+    appearance: none;
+    cursor: pointer;
+}
+
+  input[type="checkbox"] {
+    position: relative;
+    width: 16px;
+    height: 16px;
+    border: 1px solid white;
+    vertical-align: -5px;
+  }
+  
+  input[type="checkbox"]:checked{
+    background-color: white;
+    transition: 0.25s;
+  }
+
+  input[type="checkbox"]:not(:checked) {
+    background-color: transparent;
+    transition: 0.25s;
+  }
+
+  input[type="checkbox"]:checked:before {
+    position: absolute;
+    top: 1px;
+    left: 4px;
+    transform: rotate(50deg);
+    width: 4px;
+    height: 8px;
+    border-right: 2px solid #1c1e20;
+    border-bottom: 2px solid #1c1e20;
+    content: '';
+  }
 
 .center {
     text-align: center;
@@ -24,6 +64,41 @@ a {
     visibility: hidden;
 }
 
+.ui_settings {
+    visibility: hidden;
+}
+
+.wasd_buttons {
+    visibility: visible;
+}
+
+.wasd_buttons button {
+    padding: 5px 20px;
+    font-size: 20px;
+    border-radius: 0;
+    border: 2px solid white;
+    background-color: transparent;
+    cursor: pointer;
+    font-family: "Geist Mono";
+    transition: 0.25s;
+}
+
+.wasd_buttons button:hover {
+    background-color: white;
+    color: #1c1e20;
+    transition: 0.25s; 
+}
+
+.asd_key {
+    position: relative;
+    top: -5px;
+}
+
+.ui_settings {
+    margin: 25px;
+    text-align: right;
+}
+
 .credit {
     position: absolute;
     top: 95%;
@@ -31,9 +106,17 @@ a {
     transform: translate(-50%,-95%);
 }
 
-#title {
+#title button {
+    border: 0;
+    background-color: transparent;
     font-size: 25px;
     font-weight: 500;
+    font-family: "Geist Mono";
+}
+
+#title button:hover {
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 #streak {
@@ -44,4 +127,8 @@ a {
 #warning {
     font-size: 12.5px;
     opacity: 0.5;
+}
+
+#bold {
+    font-weight: bold;
 }
