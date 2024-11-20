@@ -3,8 +3,8 @@ const ui_settings = document.getElementsByClassName('ui_settings');
 const show_wasd_key = document.getElementById('show_wasd_key');
 const wasd_key = document.getElementsByClassName('wasd_buttons');
 const blocks = ["O", "X", "B", "Y"];
-const description = '<p id="description">W, A, S, D = Move "Y"<br>Carry "B" to "X"<br> <br>Press [ Space ] or Click <span id="bold">SOKOBAN</span> above<br>to reset the map.<br><span id="warning">the streak will lose if you reset the map.<br>also, you can\'t save your streak data.</span></p>';
-const wasd_key_pattern = '<div class="wasd_buttons"><p class="w_key"><button onclick="KeyW()">w</button></p><p class="asd_key"><button onclick="KeyA()">a</button>\n<button onclick="KeyS()">s</button>\n<button onclick="KeyD()">d</button></p></div>';
+const description = '<p id="description">W, A, S, D = Move "Y"<br>Carry "B" to "X"<br> <br>Press [ R ] or Click <span id="bold">SOKOBAN</span> above<br>to reset the map.<br><span id="warning">the streak will be lost if you reset the map.</span></p>';
+const wasd_key_pattern = '<div class="wasd_buttons"><p class="w_key"><button id="key">w</button></p><p class="asd_key"><button id="key">a</button>\n<button id="key">s</button>\n<button id="key">d</button></p></div>';
 let map_string = "";
 let map = [
     ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
@@ -19,12 +19,60 @@ let map = [
     ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O"]
 ];
 let streak = 0;
+let key_timeout;
+let interval_W;
+
+
+function checkKeys(key){
+    switch (key){
+        case "w":
+            KeyW();
+            break;
+        case "a":
+            KeyA();
+            break;
+        case "s":
+            KeyS();
+            break;
+        case "d":
+            KeyD();
+            break;
+    }
+}
+
+
+function addHoldEvent(){
+    document.querySelectorAll('#key').forEach(element => {
+        element.addEventListener('mousedown', event => {
+            checkKeys(element.textContent);
+            key_timeout = setTimeout(() => {
+                interval_W = setInterval(() => {
+                    checkKeys(element.textContent); // 関数を実行
+                }, 50);
+            }, 500);
+        })
+        element.addEventListener('mouseup', event => {
+            if(key_timeout){
+                clearTimeout(key_timeout);
+            }
+            if(interval_W){
+                clearInterval(interval_W);
+            }
+        })
+    })
+}
 
 
 document.addEventListener('keydown', event => {
-    console.log(event.code);
     if(event.code === 'Space'){
-        gameStart();
+        if(!document.querySelector('#description')){
+            gameStart();
+        }
+    }else if(event.code === 'KeyR'){
+        streak = 0;
+        document.getElementById('streak').innerHTML = streak;
+        game_doc[0].innerHTML = "";
+        createMap();
     }
 });
 
@@ -47,10 +95,10 @@ function gameStart(){
                     'afterend',
                     wasd_key_pattern
                 )
+                addHoldEvent()
         }
-    }else if(document.querySelector('#description')){
-        streak = 0;
-        document.getElementById('streak').innerHTML = streak;
+        game_doc[0].innerHTML = "";
+        createMap();
     }else if(document.querySelector('#you_win')){
         document.getElementById('you_win').remove();
         game_doc[0].insertAdjacentHTML(
@@ -62,7 +110,11 @@ function gameStart(){
                     'afterend',
                     wasd_key_pattern
                 )
+                addHoldEvent()
         }
+    }else if(document.querySelector('#description')){
+        streak = 0;
+        document.getElementById('streak').innerHTML = streak;
     }
     game_doc[0].innerHTML = "";
     createMap();
@@ -104,6 +156,8 @@ function movingY(){
         );
         streak++;
         document.getElementById('streak').innerHTML = streak;
+        clearInterval(interval_W)
+        prepare_ms = 0;
     }
 }
 
@@ -219,6 +273,7 @@ show_wasd_key.addEventListener("change", () => {
                 'afterend',
                 wasd_key_pattern
             )
+            addHoldEvent();
         }
     } else {
         wasd_key[0].remove();
