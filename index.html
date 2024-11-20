@@ -2,11 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0", user-scalable=no>
     <title>Sokoban</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="ui_settings">
+        <input type="checkbox" name="settings" value="wasd_key" id="show_wasd_key"> Pop Up WASD Key 
+    </div>
     <div class="center">
         <p id="title">
             <button onclick="gameStart()">
@@ -17,11 +20,7 @@
             Press [ Space ] or Click <span id="bold">SOKOBAN</span> above<br>to start the game.
         </p>
         <div class="game">
-            
         </div>
-    </div>
-    <div class="ui_settings">
-        <input type="checkbox" name="settings" value="wasd_key" id="show_wasd_key"> Pop Up WASD Key 
     </div>
     <p class="credit">
         <a href="https://lit.link/lovespaces">made by lovespaces</a>
