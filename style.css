@@ -89,6 +89,7 @@ input[type="checkbox"] {
 }
 
 .ui_settings {
+    visibility: hidden;
     text-align: center;
 }
 
