@@ -20,6 +20,10 @@ a {
     opacity: 0.25;
 }
 
+a:hover {
+    text-decoration: underline;
+}
+
 input[type="checkbox"] {
     border-radius: 2.5px;
     appearance: none;
@@ -77,7 +81,7 @@ input[type="checkbox"] {
     -ms-user-select: none;
 }
 
-.wasd_buttons button {
+button {
     padding: 5px 20px;
     font-size: 20px;
     border-radius: 0;
@@ -92,7 +96,7 @@ input[type="checkbox"] {
     text-align: center;
 }
 
-.wasd_buttons button:hover {
+button:hover {
     background-color: white;
     color: #1c1e20;
     transition: 0.25s; 
@@ -101,6 +105,15 @@ input[type="checkbox"] {
 .asd_key {
     position: relative;
     top: -5px;
+}
+
+#title {
+    transform: translateZ(0);
+    -moz-transform: translatez(0);
+    -ms-transform: translatez(0);
+    -o-transform: translatez(0);
+    -webkit-transform: translateZ(0);
+    -webkit-font-smoothing: antialiased;
 }
 
 #title button {
@@ -114,6 +127,7 @@ input[type="checkbox"] {
 #title button:hover {
     text-decoration: underline;
     cursor: pointer;
+    color: white;
 }
 
 #streak {
