@@ -24,42 +24,59 @@ let interval_W;
 
 
 function checkKeys(key){
-    switch (key){
-        case "w":
-            KeyW();
-            break;
-        case "a":
-            KeyA();
-            break;
-        case "s":
-            KeyS();
-            break;
-        case "d":
-            KeyD();
-            break;
+    if(document.querySelector('#description')){
+        switch (key){
+            case "w":
+                KeyW();
+                break;
+            case "a":
+                KeyA();
+                break;
+            case "s":
+                KeyS();
+                break;
+            case "d":
+                KeyD();
+                break;
+        }
     }
 }
 
 
 function addHoldEvent(){
     document.querySelectorAll('#key').forEach(element => {
-        element.addEventListener('mousedown', event => {
-            checkKeys(element.textContent);
-            key_timeout = setTimeout(() => {
-                interval_W = setInterval(() => {
-                    checkKeys(element.textContent); // 関数を実行
-                }, 50);
-            }, 500);
-        })
-        element.addEventListener('mouseup', event => {
-            if(key_timeout){
-                clearTimeout(key_timeout);
+        element.addEventListener('mousedown', () => HoldEvent(element));
+        element.addEventListener('mouseup', deleteTimeout);
+        element.addEventListener('touchstart', (event) => {
+            if (event.cancelable) {
+                event.preventDefault();
             }
-            if(interval_W){
-                clearInterval(interval_W);
-            }
-        })
+            HoldEvent(element);
+        });
+        element.addEventListener('touchend', deleteTimeout);
     })
+}
+
+
+function HoldEvent(element){
+    checkKeys(element.textContent);
+    if(document.querySelector('#description')){
+        key_timeout = setTimeout(() => {
+            interval_W = setInterval(() => {
+                checkKeys(element.textContent); // 関数を実行
+            }, 50);
+        }, 500);
+    }
+}
+
+
+function deleteTimeout(){
+    if(key_timeout){
+        clearTimeout(key_timeout);
+    }
+    if(interval_W){
+        clearInterval(interval_W);
+    }
 }
 
 
@@ -122,18 +139,22 @@ function gameStart(){
 
 
 document.addEventListener('keydown', event => {
-    if(["KeyW","KeyA","KeyS","KeyD"].includes(event.code)){
+    if(["KeyW","KeyA","KeyS","KeyD",'ArrowUp','ArrowLeft','ArrowDown','ArrowRight'].includes(event.code)){
     switch (event.code) {
         case 'KeyW':
+        case 'ArrowUp':
             KeyW();
             break;
         case 'KeyA':
+        case 'ArrowLeft':
             KeyA();
             break;
         case 'KeyS':
+        case 'ArrowDown':
             KeyS();
             break;             
         case 'KeyD':
+        case 'ArrowRight':
             KeyD();
             break;
     }
@@ -156,8 +177,7 @@ function movingY(){
         );
         streak++;
         document.getElementById('streak').innerHTML = streak;
-        clearInterval(interval_W)
-        prepare_ms = 0;
+        deleteTimeout();
     }
 }
 
@@ -274,9 +294,11 @@ show_wasd_key.addEventListener("change", () => {
                 wasd_key_pattern
             )
             addHoldEvent();
+            document.querySelector('#sokoban_title').style.marginTop = "37.5px";
         }
     } else {
         wasd_key[0].remove();
+        document.querySelector('#sokoban_title').style.marginTop = "0px";
     }
 });
 
