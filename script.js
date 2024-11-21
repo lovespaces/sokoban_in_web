@@ -1,6 +1,5 @@
 const game_doc = document.getElementsByClassName('game');
-const ui_settings = document.getElementsByClassName('ui_settings');
-const show_wasd_key = document.getElementById('show_wasd_key');
+const ui_settings_format = '<div class="ui_settings"><input type="checkbox" name="settings" value="wasd_key" id="show_wasd_key"> Pop Up WASD Key</div>'
 const wasd_key = document.getElementsByClassName('wasd_buttons');
 const blocks = ["O", "X", "B", "Y"];
 const description = '<p id="description">W, A, S, D = Move "Y"<br>Carry "B" to "X"<br> <br>Press [ R ] or Click <span id="bold">SOKOBAN</span> above<br>to reset the map.<br><span id="warning">the streak will be lost if you reset the map.</span></p>';
@@ -97,7 +96,26 @@ document.addEventListener('keydown', event => {
 function gameStart(){
     if(document.querySelector('#tutorial')){
         document.querySelector('#tutorial').remove();
-        ui_settings[0].style.visibility = "visible";
+        game_doc[0].insertAdjacentHTML(
+            'beforebegin',
+            ui_settings_format
+        );
+        const show_wasd_key = document.getElementById('show_wasd_key');
+        show_wasd_key.addEventListener("change", () => {
+            if (show_wasd_key.checked) {
+                if(!wasd_key[0]){
+                    game_doc[0].insertAdjacentHTML(
+                        'afterend',
+                        wasd_key_pattern
+                    )
+                    addHoldEvent();
+                    document.querySelector('#sokoban_title').style.marginTop = "37.5px";
+                }
+            } else {
+                wasd_key[0].remove();
+                document.querySelector('#sokoban_title').style.marginTop = "0px";
+            }
+        });
         game_doc[0].style.visibility = "visible";
         game_doc[0].insertAdjacentHTML(
             'beforebegin',
@@ -284,23 +302,6 @@ function KeyD(){
     movingY();
     }
 }
-
-
-show_wasd_key.addEventListener("change", () => {
-    if (show_wasd_key.checked) {
-        if(!wasd_key[0]){
-            game_doc[0].insertAdjacentHTML(
-                'afterend',
-                wasd_key_pattern
-            )
-            addHoldEvent();
-            document.querySelector('#sokoban_title').style.marginTop = "37.5px";
-        }
-    } else {
-        wasd_key[0].remove();
-        document.querySelector('#sokoban_title').style.marginTop = "0px";
-    }
-});
 
 
 function getRandom(max) {
