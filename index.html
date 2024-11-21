@@ -2,29 +2,31 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0", user-scalable=no>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sokoban</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="ui_settings">
-        <input type="checkbox" name="settings" value="wasd_key" id="show_wasd_key"> Pop Up WASD Key 
-    </div>
     <div class="center">
         <p id="title">
-            <button onclick="gameStart()">
+            <button onclick="gameStart()" id="sokoban_title">
                 SOKOBAN
             </button>
         </p>
+        <div class="ui_settings">
+            <input type="checkbox" name="settings" value="wasd_key" id="show_wasd_key"> Pop Up WASD Key 
+        </div>
         <p id="tutorial">
             Press [ Space ] or Click <span id="bold">SOKOBAN</span> above<br>to start the game.
         </p>
         <div class="game">
         </div>
+        <div id="credit">
+            <p>
+                <a href="https://lit.link/lovespaces">made by lovespaces</a>
+            </p>
+        </div>
     </div>
-    <p class="credit">
-        <a href="https://lit.link/lovespaces">made by lovespaces</a>
-    </p>
     <script src="script.js"></script>
 </body>
 </html>
