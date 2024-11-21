@@ -22,6 +22,18 @@ let key_timeout;
 let interval_W;
 
 
+window.addEventListener('load', function(){
+    if (window.navigator.userAgent.includes("Mobile")){
+        document.querySelector('#tutorial').insertAdjacentHTML(
+            'beforebegin',
+            '<button onclick="gameStart()" id="start_button">start</button>'
+        );
+        document.querySelector('#tutorial').innerHTML = 'Tap [ start ] button or Tap <span id="bold">SOKOBAN</span> above<br>to start the game.';
+        description = '<p id="description">W, A, S, D = Move "Y"<br>Carry "B" to "X"<br> <br>Tap <span id="bold">SOKOBAN</span> above<br>to reset the map.<br><span id="warning">the streak will be lost if you reset the map.</span></p>';
+    };
+  });
+
+
 function checkKeys(key){
     if(document.querySelector('#description')){
         switch (key){
@@ -116,6 +128,10 @@ function gameStart(){
                 document.querySelector('#sokoban_title').style.marginTop = "0px";
             }
         });
+        if(document.querySelector('#start_button')){
+            document.querySelector('#start_button').remove();
+            show_wasd_key.checked = true;
+        }
         game_doc[0].style.visibility = "visible";
         game_doc[0].insertAdjacentHTML(
             'beforebegin',
@@ -132,8 +148,6 @@ function gameStart(){
                 )
                 addHoldEvent()
         }
-        game_doc[0].innerHTML = "";
-        createMap();
     }else if(document.querySelector('#you_win')){
         document.getElementById('you_win').remove();
         game_doc[0].insertAdjacentHTML(
