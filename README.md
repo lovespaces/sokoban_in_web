@@ -1,6 +1,9 @@
 # 倉庫番 in web
 倉庫番 in webです。全部英語です。
 
+## 遊ぶ
+[ここから](https://lovespaces.github.io/sokoban_in_web) 遊べます
+
 ## 遊び方
 Spaceもしくは上の**SOKOBAN**をクリックすることでゲームをスタートすることができます  
 スマホだと`start`と書かれたボタンが真ん中に表示されます  
