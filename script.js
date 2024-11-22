@@ -2,7 +2,7 @@ const game_doc = document.getElementsByClassName('game');
 const ui_settings_format = '<div class="ui_settings"><input type="checkbox" name="settings" value="wasd_key" id="show_wasd_key"> Pop Up WASD Key</div>'
 const wasd_key = document.getElementsByClassName('wasd_buttons');
 const blocks = ["O", "X", "B", "Y"];
-const description = '<p id="description">W, A, S, D = Move "Y"<br>Carry "B" to "X"<br> <br>Press [ R ] or Click <span id="bold">SOKOBAN</span> above<br>to reset the map.<br><span id="warning">the streak will be lost if you reset the map.</span></p>';
+const description = `<p id="description">W, A, S, D = Move "Y"<br>Carry "B" to "X"<br> <br>Press [ R ] or Click <span id="bold">SOKOBAN</span> above<br>to reset the map.<br><span id="warning">the streak will be lost if you reset the map.</span></p>`;
 const wasd_key_pattern = '<div class="wasd_buttons"><p class="w_key"><button id="key">w</button></p><p class="asd_key"><button id="key">a</button>\n<button id="key">s</button>\n<button id="key">d</button></p></div>';
 let map_string = "";
 let map = [
@@ -28,7 +28,7 @@ window.addEventListener('load', function(){
             'beforebegin',
             '<button onclick="gameStart()" id="start_button">start</button>'
         );
-        document.querySelector('#tutorial').innerHTML = 'Tap [ start ] button or Tap <span id="bold">SOKOBAN</span> above<br>to start the game.';
+        document.querySelector('#tutorial').innerHTML = '<a href="https://github.com/lovespaces/sokoban_in_web/blob/main/README.md">HOW TO PLAY (日本語)</a><br> <br>Tap [ start ] button or Tap <span id="bold">SOKOBAN</span> above<br>to start the game.';
         description = '<p id="description">W, A, S, D = Move "Y"<br>Carry "B" to "X"<br> <br>Tap <span id="bold">SOKOBAN</span> above<br>to reset the map.<br><span id="warning">the streak will be lost if you reset the map.</span></p>';
     };
   });
@@ -74,7 +74,7 @@ function HoldEvent(element){
     if(document.querySelector('#description')){
         key_timeout = setTimeout(() => {
             interval_W = setInterval(() => {
-                checkKeys(element.textContent); // 関数を実行
+                checkKeys(element.textContent);
             }, 50);
         }, 500);
     }
@@ -108,6 +108,9 @@ document.addEventListener('keydown', event => {
 function gameStart(){
     if(document.querySelector('#tutorial')){
         document.querySelector('#tutorial').remove();
+        document.querySelector('#credit').insertAdjacentHTML('afterbegin',
+            '<a href="https://github.com/lovespaces/sokoban_in_web/blob/main/README.md">how to play (日本語)</a><br>'
+        )
         game_doc[0].insertAdjacentHTML(
             'beforebegin',
             ui_settings_format
@@ -150,6 +153,9 @@ function gameStart(){
         }
     }else if(document.querySelector('#you_win')){
         document.getElementById('you_win').remove();
+        if(document.getElementById('next_button')){
+            document.getElementById('next_button').remove();
+        }
         game_doc[0].insertAdjacentHTML(
             'afterend',
             description
@@ -205,7 +211,11 @@ function movingY(){
         }
         game_doc[0].insertAdjacentHTML(
             'afterend',
-            '<p id="you_win">Hooray! You have carried all the boxes to the goals!<br> <br>Press [ Space ] or Click <span id="bold">SOKOBAN</span><br>to create another map.</p>'
+            `<p id="you_win">Hooray! You have carried all the boxes to the goals!<br> <br>Press [ Space ] or Click <span id="bold">SOKOBAN</span><br>to create another map.</p>`
+        );
+        game_doc[0].insertAdjacentHTML(
+            'afterend',
+            '<span id="next_button"><br><button onclick="gameStart()">next stage</button></span>'
         );
         streak++;
         document.getElementById('streak').innerHTML = streak;
