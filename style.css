@@ -136,3 +136,8 @@ button:hover {
 #bold {
     font-weight: bold;
 }
+
+#tutorial a {
+    opacity: 1;
+    font-size: 20px;
+}
