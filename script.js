@@ -393,7 +393,7 @@ function createMap(){
         while(true){
             box_x = getRandom(8) + 1;
             box_y = getRandom(11) + 1;
-            if(blocks.includes(map[box_x][box_y])){
+            if(blocks.includes(map[box_x][box_y]) || blocks.includes(map[box_x][box_y + 1]) && blocks.includes(map[box_x + 1][box_y] && blocks.includes(map[box_x][box_y + 1]) && blocks.includes(map[box_x + 1][box_y + 1]))){
                 continue;
             }else if(box_x <= 1 || box_y <= 1 || box_x >= 7 || box_y >= 10){
                 continue;
