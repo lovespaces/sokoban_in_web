@@ -2,7 +2,7 @@
 倉庫番 in webです。全部英語です。
 
 ## 遊ぶ
-[ここから](https://lovespaces.github.io/sokoban_in_web) 遊べます
+[ここから](https://l0v3.fyi/sokoban) 遊べます
 
 ## 遊び方
 Spaceもしくは上の**SOKOBAN**をクリックすることでゲームをスタートすることができます  
