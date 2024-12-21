@@ -29,7 +29,8 @@ function startGame(){
     createMap();
     if($(".non-game").length){
         $("#map").removeClass("non-game");
-    }
+    };
+    $("#tutorial").remove();
     $("#map").addClass("in-game");
     $("#streak").text(streak);
     $("#description").html("Rキーでリセット");
