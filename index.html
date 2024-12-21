@@ -3,26 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sokoban</title>
+    <title>sokoban</title>
+    <link rel="stylesheet" href="basic.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <p id="title">
-        <button onclick="gameStart()" id="sokoban_title">
-            SOKOBAN
-        </button>
+    <p>
+        ⚠️ これは倉庫番 in webのリメイクの試作版です。
     </p>
-    <p id="tutorial">
-        <a href="https://github.com/lovespaces/sokoban_in_web/blob/main/README.md">HOW TO PLAY (日本語)</a><br> <br>
-        Press [ Space ] or Click <span id="bold">SOKOBAN</span> above<br>to start the game.
-    </p>
-    <div class="game">
-    </div>
-    <div>
-        <p id="credit">
-            <a href="https://lit.link/lovespaces">made by lovespaces</a><br>
+    <h1>
+        <span id="start_game">SOKOBAN</span>
+    </h1>
+    <h2 id="streak">
+        
+    </h2>
+    <div class="map">
+        <p id="map" class="non-game">
+                
         </p>
     </div>
+    <p id="description">
+        
+    </p>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
