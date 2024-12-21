@@ -17,3 +17,5 @@ Mを一気に二つ運ぶことも可能です。
 ## バグ報告
 [twitter](https://twitter.com/lovedspaces) `@lovedspaces` までお問い合わせください
 私とDiscordでフレンドの方はDiscordに問い合わせてもらったほうがすぐ対応しやすいです
+> [!NOTE]
+> ついでにIssueにも書いてくれると助かります
