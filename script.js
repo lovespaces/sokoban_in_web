@@ -1,13 +1,16 @@
 var map = [];
 var map_string = "";
-var temp_map = [];
 var player_x = 0;
 var player_y = 0;
 var streak = 0;
 var objectives_count = 0;
 
 $("#start_game").click(
-    startGame
+    function() {
+        if(!($(".in-game").length)){
+            startGame();
+        } // 現時点では、ゲームクリア時のみクリック可能だがこれから変える可能性はある
+    }
 );
 
 $("body").on("keydown", function(event){
@@ -16,7 +19,9 @@ $("body").on("keydown", function(event){
             movePlayer(event.key);
         };
     }else if(event.code == "Space"){
-        startGame();
+        if(!($(".in-game").length)){
+            startGame();
+        }
     }else if(event.code == "KeyR"){
         if($(".in-game").length){
             streak = 0;
@@ -124,7 +129,6 @@ function moveObjectives(x, y, dir){
         map[player_y][player_x] = "&nbsp;";
         map[obj_y][obj_x] = "M";
         map[y][x] = "Y";
-        console.log(block);
         if(block == "M"){
             if(map[another_y][another_x] == "&nbsp;"){
                 if(map[another_y][another_x] != "O"){
@@ -155,10 +159,10 @@ function setObjectives(){
         objectives_count = Math.floor(Math.random() * streak + 1);
         if(streak < 2){
             objectives_count = Math.floor(Math.random() * 2 + 1);
-        }else if(objectives_count > 10){
+        }else if(objectives_count > 15){
             continue;
-        }else if(objectives_count < Math.floor(streak / (streak / 2)) && streak > 8){
-            objectives_count += 1;
+        }else if(objectives_count <= Math.ceil(streak / 3.5) && streak > 7){
+            objectives_count += Math.floor(streak / 4);
         };
         break;
     }
@@ -201,7 +205,7 @@ function setMapLength(){
     // マップの広さ設定
     map = [];
     for(let i = 0; i < 9; i++){
-        temp_map = [];
+        var temp_map = [];
         for(let j = 0; j < 12; j++){
             temp_map.push("O");
         };
