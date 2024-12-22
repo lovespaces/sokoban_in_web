@@ -2,11 +2,14 @@ var map = [];
 var map_string = "";
 var player_x = 0;
 var player_y = 0;
-var streak = 0;
+var streak = -1;
 var objectives_count = 0;
 
 $("#start_game").click(
     function() {
+        if(streak == -1){
+            streak = 0;
+        };
         if(!($(".in-game").length)){
             startGame();
         } // 現時点では、ゲームクリア時のみクリック可能だがこれから変える可能性はある
@@ -20,6 +23,9 @@ $("body").on("keydown", function(event){
         };
     }else if(event.code == "Space"){
         if(!($(".in-game").length)){
+            if(streak == -1){
+                streak = 0;
+            };
             startGame();
         }
     }else if(event.code == "KeyR"){
