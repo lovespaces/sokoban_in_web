@@ -147,6 +147,7 @@ function moveObjectives(x, y, dir){
                 map[player_y][player_x] = "Y";
                 map[obj_y][obj_x] = "M";
                 map[y][x] = "M";
+                return;
             };
         }else if(block == "X"){
             map[obj_y][obj_x] = "&nbsp;";
@@ -154,7 +155,7 @@ function moveObjectives(x, y, dir){
         }
         player_x = x;
         player_y = y;
-    }
+    };
 };
 
 function setObjectives(){
